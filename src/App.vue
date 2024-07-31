@@ -1,30 +1,44 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import { computed, provide } from 'vue';
+import TheFooter from './components/TheFooter.vue';
+import { useWindowSize } from '@vueuse/core'
+import { useRoute } from 'vue-router';
+
+const { width, height } = useWindowSize()
+const route = useRoute()
+
+const isMobile = computed(() => {
+  console.log(width.value, height.value);
+  return width.value < height.value;
+})
+const seeThrough = computed(() => {
+  return route.fullPath === '/'
+})
+const absolute = computed(() => {
+  return route.fullPath === '/'
+})
+
+provide('isMobile', isMobile)
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="main">
+    <BaseHeader :seeThrough="seeThrough" :absolute="absolute"></BaseHeader>
+    <router-view></router-view>
+    <TheFooter></TheFooter>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+#main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 }
 </style>
