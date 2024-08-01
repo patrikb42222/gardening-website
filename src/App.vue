@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, provide } from 'vue';
 import TheFooter from './components/TheFooter.vue';
+import TheHeader from './components/TheHeader.vue';
 import { useWindowSize } from '@vueuse/core'
 import { useRoute } from 'vue-router';
 
@@ -23,7 +24,7 @@ provide('isMobile', isMobile)
 
 <template>
   <div id="main">
-    <BaseHeader :seeThrough="seeThrough" :absolute="absolute"></BaseHeader>
+    <TheHeader :seeThrough="seeThrough" :absolute="absolute"></TheHeader>
     <router-view></router-view>
     <TheFooter></TheFooter>
   </div>

@@ -1,4 +1,12 @@
 <template>
+    <menu @click="closeMenu" v-if="menuOpen">
+        <div id="menu-links">
+            <router-link to="/">HOME</router-link>
+            <router-link to="/about">ABOUT</router-link>
+            <router-link to="/gallery">PORTFOLIO</router-link>
+            <router-link to="/contact">CONTACT</router-link>
+        </div>
+    </menu>
     <header :class="{ absolute: absolute, 'see-through': seeThrough }">
         <router-link to="/">
             <div id="logo">
@@ -7,6 +15,9 @@
             </div>
         </router-link>
         <div id="links" v-if="!isMobile">
+            <router-link to="/">
+                <BaseButton class="header-button">HOME</BaseButton>
+            </router-link>
             <router-link to="/about">
                 <BaseButton class="header-button">ABOUT</BaseButton>
             </router-link>
@@ -17,14 +28,23 @@
                 <BaseButton class="header-button" id="contact">CONTACT</BaseButton>
             </router-link>
         </div>
-        <div id="tab" v-else>
+        <div id="tab" @click="openMenu" v-else>
             ☰
         </div>
     </header>
 </template>
 
 <script lang="ts">
+import { inject } from 'vue';
+
 export default {
+    setup() {
+        const isMobile = inject<boolean>('isMobile')
+
+        return {
+            isMobile
+        }
+    },
     props: {
         absolute: {
             type: Boolean,
@@ -37,7 +57,25 @@ export default {
             required: false,
         }
     },
-    inject: ['isMobile'],
+    data() {
+        return {
+            menuOpen: false
+        }
+    },
+    methods: {
+        openMenu() {
+            this.menuOpen = true
+        },
+        closeMenu() {
+            this.menuOpen = false
+        }
+    },
+    watch: {
+        isMobile() {
+            if (!this.isMobile)
+                this.menuOpen = false
+        }
+    },
     mounted() {
         console.log('seeThrough', this.seeThrough)
         console.log('absolute', this.absolute)
@@ -46,6 +84,41 @@ export default {
 </script>
 
 <style scoped>
+    menu {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100vh;
+
+        position: fixed;
+        z-index: 5;
+        margin: 0;
+        
+        background-color: rgba(9, 32, 47, 0.803);
+        color: #F45800;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #menu-links {
+        width: 30rem;
+        height: 50vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    #menu-links a {
+        color: #F45800;
+        font-family: 'Pontano Sans';
+        font-size: 4rem;
+    }
+    #menu-links a:hover {
+        color: white;
+    }
+
     header {
         box-sizing: border-box;
         padding: 1rem;
@@ -98,13 +171,14 @@ export default {
         display: flex;
         justify-content: space-between;
         flex-grow: 1;
-        max-width: 30rem;
+        max-width: 40rem;
     }
 
     #tab {
         display: flex;
         align-items: center;
-        font-size: 1.5rem;
+        font-size: 2rem;
+        cursor: pointer;
     }
 
     .header-button {

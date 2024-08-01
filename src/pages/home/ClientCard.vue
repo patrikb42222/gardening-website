@@ -16,9 +16,14 @@ div {
     width: 15rem;
     height: 3.5rem;
     border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h4 {
+    font-family: Roboto;
     text-align: center;
     color: white;
 }

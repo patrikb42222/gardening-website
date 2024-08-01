@@ -89,7 +89,7 @@ h1 span {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin: 0rem 2rem;
+    margin: 2rem 2rem;
     max-width: 75rem;
 }
 

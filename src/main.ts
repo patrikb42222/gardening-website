@@ -4,7 +4,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import './style.css'
 import App from './App.vue'
 
-import BaseHeader from './components/BaseHeader.vue'
 import BaseButton from './components/BaseButton.vue'
 import BaseTitle from './components/BaseTitle.vue'
 import TheHome from './pages/home/TheHome.vue'
@@ -23,7 +22,6 @@ const router = createRouter({
     ],
 })
 
-app.component('BaseHeader', BaseHeader)
 app.component('BaseButton', BaseButton)
 app.component('BaseTitle', BaseTitle)
 

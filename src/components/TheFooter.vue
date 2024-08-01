@@ -36,7 +36,9 @@
     h4 {
         font-family: 'Pontano Sans', sans-serif; 
         font-weight: 100;
-        line-height: 0.5rem;
+        line-height: 1.5rem;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     footer {
@@ -52,8 +54,7 @@
         text-align: center;
     }
 
-    section{
-
+    section {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;

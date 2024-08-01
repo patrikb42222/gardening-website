@@ -7,7 +7,7 @@ import TheImages from './TheImages.vue';
         <img src="../../assets/geometry-1.svg" class="background-element" id="geo-1">
     </div>
     <div>
-        <BaseTitle id="title">OUR SERVICES</BaseTitle>
+        <BaseTitle id="title">GALLERY</BaseTitle>
         <TheImages></TheImages>
     </div>
 </template>
@@ -20,5 +20,8 @@ import TheImages from './TheImages.vue';
 }
 #title {
     margin: 2rem 0rem 10rem 0rem;
+}
+#title section {
+    height: 15rem;
 }
 </style>

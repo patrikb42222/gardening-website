@@ -1,16 +1,27 @@
-<script setup lang="ts">
+<script lang="ts">
+import { inject } from 'vue';
+
+export default {
+    setup() {
+        const isMobile = inject<boolean>('isMobile')
+
+        return {
+            isMobile
+        }
+    }
+}
 </script>
 
 <template>
     <section>
-        <div id="card">
+        <div :class="{ 'card-desktop': !isMobile, 'card-mobile': isMobile }" class="card">
             <h1>
                 ABOUT ME
             </h1>
             <h3>
                 I spent over a <b>decade</b> designing and building <i>sprinkler systems</i>, <i>beautiful gardens</i>, navigation grids for <i>robotic lawnmowers</i>.
             </h3>
-            <BaseButton class="button">CONTACT</BaseButton>
+            <router-link to="/contact"><BaseButton class="button">CONTACT</BaseButton></router-link>
         </div>
     </section>
 </template>
@@ -23,20 +34,31 @@ section {
     background-image: url('../../assets/gardener-1.jpg');
 }
 
-#card {
+.card {
     box-sizing: border-box;
     position: relative;
-    top: 5rem;
-    left: 20%;
-    width: 20rem;
-    height: 30rem;
-    background-color: white;
-    padding: 2rem;
-
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    padding: 2rem;
+    background-color: white;
+}
+
+.card-desktop {
+    top: 5rem;
+    left: 20%;
+    width: 20rem;
+    height: 30rem;
+
+}
+
+.card-mobile {
+    top: 5rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20rem;
+    height: 30rem;
 }
 
 h1 {
@@ -47,14 +69,6 @@ h1 {
 h3 {
     font-family: Roboto, sans-serif;
     font-weight: 300;
-}
-
-bold {
-    font-weight: 900;
-}
-
-italic {
-    font-style: italic;
 }
 
 .button {
@@ -71,5 +85,9 @@ italic {
 
     width: 10rem;
     height: 3.5rem;
+}
+
+a { 
+    text-decoration: none;
 }
 </style>

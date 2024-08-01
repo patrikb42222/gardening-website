@@ -1,6 +1,6 @@
 <template>
     <div class="background">
-        <img src="../../assets/geometry-1.svg" class="background-element" id="geo-1">
+        <img src="../../assets/geometry-1.svg" class="background-fixed" id="geo-1">
     </div>
     <div>
         <BaseTitle id="title">OUR SERVICES</BaseTitle>
@@ -75,7 +75,7 @@ section.image {
     background-size: cover;
 }
 section {
-    height: 15rem;
+    height: 20rem;
 
     display: flex;
     justify-content: center;
